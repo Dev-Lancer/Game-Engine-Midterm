@@ -64,8 +64,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Short hop when releasing Space
-        if (Keyboard.current.spaceKey.wasReleasedThisFrame &&
-            rBody.linearVelocity.y > 0.0f)
+        if (Keyboard.current.spaceKey.wasReleasedThisFrame &&rBody.linearVelocity.y > 0.0f)
         {
             jumpCutRequested = true;
         }
@@ -73,10 +72,7 @@ public class PlayerMovement : MonoBehaviour
         // Fast fall
         if (Keyboard.current.sKey.isPressed && !IsGrounded())
         {
-            rBody.linearVelocity = new Vector2(
-                rBody.linearVelocity.x,
-                -fallSpeed
-            );
+            rBody.linearVelocity = new Vector2(rBody.linearVelocity.x,-fallSpeed);
         }
 
         jumpCheck = IsGrounded();
@@ -101,10 +97,7 @@ public class PlayerMovement : MonoBehaviour
         // Apply jump request
         if (jumpRequested && IsGrounded())
         {
-            rBody.linearVelocity = new Vector2(
-                rBody.linearVelocity.x,
-                jumpPow
-            );
+            rBody.linearVelocity = new Vector2(rBody.linearVelocity.x,jumpPow);
 
             jumpRequested = false;
         }
@@ -114,10 +107,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (rBody.linearVelocity.y > 0.0f)
             {
-                rBody.linearVelocity = new Vector2(
-                    rBody.linearVelocity.x,
-                    rBody.linearVelocity.y * 0.5f
-                );
+                rBody.linearVelocity = new Vector2(rBody.linearVelocity.x, rBody.linearVelocity.y * 0.5f);
             }
 
             jumpCutRequested = false;
@@ -148,8 +138,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        if (isFaceRight && hori < 0.0f ||
-            !isFaceRight && hori > 0.0f)
+        if (isFaceRight && hori < 0.0f ||!isFaceRight && hori > 0.0f)
         {
             isFaceRight = !isFaceRight;
 
@@ -180,9 +169,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Void")
+        if (collision.gameObject.tag == "Void" || collision.gameObject.tag == "Enemy")
         {
             Die();
         }
+
+
     }
 }

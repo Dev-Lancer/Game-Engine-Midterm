@@ -30,4 +30,10 @@ public class GameManager : MonoBehaviour
         goldCoin += num;
         Debug.Log("You just picked up" + num + "coin(s)");
     }
+
+    public void CoinDeduct(int num)
+    {
+        goldCoin -= num;
+        Debug.Log("You just spent" + num + "coin(s)");
+    }
 }
