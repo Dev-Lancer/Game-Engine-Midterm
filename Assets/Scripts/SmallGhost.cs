@@ -11,6 +11,6 @@ public class SmallGhost : EnemyBaseScript
     // Update is called once per frame
     void Update()
     {
-        Move();
+        Move(2.5f);
     }
 }

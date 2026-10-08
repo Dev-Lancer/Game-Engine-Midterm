@@ -34,7 +34,7 @@ public abstract class EnemyBaseScript : MonoBehaviour
             direction = 1;
         }
     }
-    public void Move()
+    public void Move(float cusSpeed)
     {
         if (waypoints == null || waypoints.Length == 0) return;
 
@@ -45,7 +45,7 @@ public abstract class EnemyBaseScript : MonoBehaviour
         transform.position = Vector2.MoveTowards(
             transform.position,
             wp.position,
-            speed * Time.deltaTime
+            cusSpeed * Time.deltaTime
         );
 
         if (Vector2.Distance(transform.position, wp.position) <= reachThreshold)

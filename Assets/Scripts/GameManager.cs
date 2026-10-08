@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void collectCoint(int num)
+    public void collectCoin(int num)
     {
         goldCoin += num;
         Debug.Log("You just picked up" + num + "coin(s)");

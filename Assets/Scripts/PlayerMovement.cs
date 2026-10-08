@@ -1,5 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 [RequireComponent(typeof(Rigidbody2D))]
 
 public class PlayerMovement : MonoBehaviour
@@ -28,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public bool jumpCheck;
     public GameManager manager;
     public GameObject respawnPoint;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         manager = FindAnyObjectByType<GameManager>();
@@ -36,9 +39,9 @@ public class PlayerMovement : MonoBehaviour
         respawnPoint = GameObject.FindGameObjectWithTag("RespawnPoint");
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Left and right
         hori = 0.0f;
 
         if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
@@ -77,8 +80,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         jumpCheck = IsGrounded();
+
+        Flip();
+    }
+    public void TakeDamage(int damage)
+    {
+        healthPoint -= damage;
+        if (healthPoint <= 0)
+            Die();
     }
 
+    public int checkHealthPoint()
+    {
+        return healthPoint;
+    }
     private void FixedUpdate()
     {
         Move();
@@ -131,8 +146,43 @@ public class PlayerMovement : MonoBehaviour
         rBody.AddForce(Vector2.right * movement);
     }
 
+    private void Flip()
+    {
+        if (isFaceRight && hori < 0.0f ||
+            !isFaceRight && hori > 0.0f)
+        {
+            isFaceRight = !isFaceRight;
+
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1;
+
+            transform.localScale = localScale;
+        }
+    }
+
+    public void Die()
+    {
+        Debug.Log("Player Died!!!");
+        this.transform.position = respawnPoint.transform.position;
+        healthPoint = 1;
+        //manager.EndGame();
+    }
+
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.5f, groundLayer);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Void")
+        {
+            Die();
+        }
     }
 }
