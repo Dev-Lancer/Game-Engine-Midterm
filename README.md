@@ -6,5 +6,7 @@ Student ID: 100971208
    For the singleton, I created a GameManager class to store and update the player's score, and a Coin class to handle coin collection. This allows other scripts, such as the Coin class, to access the same GameManager instance without creating a new one. Whenever the player touch the coin collider, it will call the function in GameManager to add coins to the storage, and the coin is then destroyed. I chose to implement this to keep the coin data consistent throughout the game. It also makes the system easier to manage and allows other gameplay systems to access the player's coins in the future, such as when purchasing items from a shop.
   Overall I managed to add camera to follow the player, basic movement even though I don't know why the jump didnt work since I took the PlayerMovement script from the tutorial project, it worked on that project but the new one I created for midterm didn't work. As a reminder all the movement math/scripts were taken from my tutorial project. That is why I can get lots of basic feature in the game. I also took the reference from the tutorial to write new scripts. But in the end I only had 1 hour and I couldn't get it done in time. 
 
+  Cited code from tutorial: All the player, enemy, camera movement math, script, input.
+
 
  
